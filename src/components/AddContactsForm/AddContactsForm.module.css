@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnAdd {
+  width: 110px;
+  padding: 8px;
+  margin: 10px 0 0;
+}
+
+input {
+  width: 100%;
+  display: block;
+  margin-top: 5px;
+}
