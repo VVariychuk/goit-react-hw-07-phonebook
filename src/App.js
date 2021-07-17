@@ -17,7 +17,8 @@ class App extends Component {
     this.props.fetchContacts();
   };
 
-  render() {    
+  render() {
+    const {isLoadingContacts} = this.props
     return (
       <Container >
         <Section
@@ -28,14 +29,17 @@ class App extends Component {
         />
         <Section
           title={'Contacts'}
-          children={
-            <>
+        >
+          {
+            isLoadingContacts
+            ? <h1>Загружаем</h1>
+            :<>
               <Filter />
               
               <ContactList />
             </>
           }
-        />
+        </Section>
       </Container>
     );
   };

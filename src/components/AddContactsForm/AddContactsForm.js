@@ -27,7 +27,9 @@ class AddContactsForm extends Component {
 
     checkUniq = (contacts, name) => {
     const { onSubmit } = this.props
-    return contacts.some((i) => i.name === name) ? alert(`${name} is already in contacts`) : onSubmit(this.state.name, this.state.number)
+        return contacts.some((i) => i.name === name)
+            ? alert(`${name} is already in contacts`)
+            : onSubmit(this.state.name, this.state.number)
   }
 
     render() {
