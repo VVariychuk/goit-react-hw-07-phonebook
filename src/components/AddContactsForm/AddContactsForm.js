@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import phonebookActions from '../../redux/phonebook/phonebook-actions';
+import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+import phonebookSelectors from "../../redux/phonebook/phonebook-selectors";
+
 import styles from './AddContactsForm.module.css'
 
 class AddContactsForm extends Component {
@@ -16,10 +18,17 @@ class AddContactsForm extends Component {
     };
 
     handleSubmit = e => {
-        e.preventDefault();
-        this.props.onSubmit(this.state.name, this.state.number);
+        e.preventDefault(); 
+        const { contacts } = this.props
+        const { name } = this.state
+        this.checkUniq(contacts, name);
         this.setState({ name: '', number:'' });
     };
+
+    checkUniq = (contacts, name) => {
+    const { onSubmit } = this.props
+    return contacts.some((i) => i.name === name) ? alert(`${name} is already in contacts`) : onSubmit(this.state.name, this.state.number)
+  }
 
     render() {
         return (
@@ -62,9 +71,13 @@ class AddContactsForm extends Component {
     }
 };
 
+const mapStateToProps = (state) => ({
+  contacts: phonebookSelectors.getAllContacts(state),
+})
+
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number)=> dispatch(phonebookActions.addContact(name, number))
+  onSubmit: (name, number)=> dispatch(phonebookOperations.addContact(name, number))
 });
 
 
-export default connect(null, mapDispatchToProps)(AddContactsForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddContactsForm);

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import phonebookActions from '../../redux/phonebook/phonebook-actions';
+import { changeFilter } from '../../redux/phonebook/phonebook-actions';
+import phonebookSelectors from '../../redux/phonebook/phonebook-selectors';
 
 function Filter({ value, onChange}) {
     return (
@@ -18,10 +19,10 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    value: state.phonebook.filter,
+    value: phonebookSelectors.getFilter(state),
 });
 const mapDispatchToProps = dispatch => ({
-    onChange: (e) => dispatch(phonebookActions.changeFilter(e.target.value)),
+    onChange: (e) => dispatch(changeFilter(e.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

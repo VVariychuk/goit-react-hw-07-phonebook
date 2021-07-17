@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import styles from './ContactsList.module.css';
 
 import ContactsListItm from './ContactsListItm'
-import phonebookActions from '../../redux/phonebook/phonebook-actions';
+import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+import phonebookSelectors from '../../redux/phonebook/phonebook-selectors'
 
-const ContactsList = ({ contacts, onDeleteContact })=> {
+const ContactsList = ({ contacts, onDeleteContact }) => {
     return (
         <>
             {contacts.length ?
@@ -26,18 +27,13 @@ const ContactsList = ({ contacts, onDeleteContact })=> {
     )
 };
 
-const showFilteredContacts = (contacts, filter) => {
-    const normalizeFilter = filter.toLowerCase();
 
-    return contacts.filter(({name}) => name.toLowerCase().includes(normalizeFilter))
-};
-
-const mapStateToProps = ({phonebook:{contacts, filter}}) => ({
-contacts: showFilteredContacts(contacts, filter)
+const mapStateToProps = state => ({
+contacts: phonebookSelectors.getFilteredContacts(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-onDeleteContact: id => dispatch(phonebookActions.deleteContact(id))
+onDeleteContact: id => dispatch(phonebookOperations.deleteContact(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);

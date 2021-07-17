@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-03-phonebook",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://vvariychuk.github.io/goit-react-hw-07-phonebook/",
@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "gh-pages": "^2.2.0",
     "modern-normalize": "^1.1.0",
     "react": "^17.0.2",
@@ -25,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+     "api-server": "json-server --port 4040 --delay 300 --watch db.json"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +49,7 @@
   },
   "devDependencies": {
     "eslint": "^7.27.0",
+    "json-server": "^0.16.3",
     "prettier": "^2.3.0",
     "redux-devtools-extension": "^2.13.9"
   }
